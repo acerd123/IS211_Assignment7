@@ -40,7 +40,7 @@ class Player:
 
 class Game:
     def __init__(self, players, win_points=100) -> None:
-        self.players = players  # Accept the dynamic number of players
+        self.players = players  
         self.win_points = win_points
         self.winner = None
 
@@ -57,7 +57,7 @@ class Game:
             current_player = self.players[current_player_idx]
             print(f"\nIt's {current_player.name}'s turn")
             current_player.play_turn()
-            current_player_idx = (current_player_idx + 1) % len(self.players)  # Rotate through players
+            current_player_idx = (current_player_idx + 1) % len(self.players)  
             print("----------------- End of Round ----------------")
 
         print(f"The winner is {self.winner.name}!")
@@ -70,23 +70,23 @@ class Game:
         self.winner = None
 
 def main():
-    # Ask for the number of players during runtime
+    
     num_players = int(input("Enter the number of players: "))
 
-    # Create players dynamically based on user input
+    
     players = []
     for i in range(1, num_players + 1):
         player_name = input(f"Enter name for Player {i}: ")
         players.append(Player(player_name))
 
-    game = Game(players)  # Pass the dynamically created players
+    game = Game(players)  
 
     while True:
         game.play()
         
         play_again = input("\nWould you like to play another game? (y/n): ").lower()
         if play_again == 'y':
-            game.reset_game()  # Reset game state for a new round
+            game.reset_game()  
         else:
             print("Thank you for playing!")
             break
