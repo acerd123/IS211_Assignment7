@@ -1,5 +1,4 @@
 import random
-import argparse
 
 def roll_die(sides=6):
     return random.randint(1, sides)
@@ -41,7 +40,7 @@ class Player:
 
 class Game:
     def __init__(self, players, win_points=100) -> None:
-        self.players = players
+        self.players = players  # Accept the dynamic number of players
         self.win_points = win_points
         self.winner = None
 
@@ -58,7 +57,7 @@ class Game:
             current_player = self.players[current_player_idx]
             print(f"\nIt's {current_player.name}'s turn")
             current_player.play_turn()
-            current_player_idx = (current_player_idx + 1) % len(self.players)
+            current_player_idx = (current_player_idx + 1) % len(self.players)  # Rotate through players
             print("----------------- End of Round ----------------")
 
         print(f"The winner is {self.winner.name}!")
@@ -71,18 +70,16 @@ class Game:
         self.winner = None
 
 def main():
-    # Parse command-line arguments
-    parser = argparse.ArgumentParser(description="Pig Game")
-    parser.add_argument('--numPlayers', type=int, default=2, help='Number of players (default is 2)')
-    args = parser.parse_args()
+    # Ask for the number of players during runtime
+    num_players = int(input("Enter the number of players: "))
 
     # Create players dynamically based on user input
     players = []
-    for i in range(1, args.numPlayers + 1):
+    for i in range(1, num_players + 1):
         player_name = input(f"Enter name for Player {i}: ")
         players.append(Player(player_name))
 
-    game = Game(players)
+    game = Game(players)  # Pass the dynamically created players
 
     while True:
         game.play()
@@ -96,6 +93,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
 
 
     
